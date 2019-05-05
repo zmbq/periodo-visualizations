@@ -1,0 +1,79 @@
+
+{
+
+    "title": "my bag of periods",
+    "items": {
+        "p03377fkhrv": {
+            "type": "Period",
+            "language": "http://lexvo.org/id/iso639-1/en",
+            "id": "p03377fkhrv",
+            "localizedLabels": {
+                "en": [
+                    "Iron Age"
+                ]
+            },
+            "start": {
+                "in": {
+                    "year": "-0799"
+                },
+                "label": "800 B.C."
+            },
+            "spatialCoverage": [
+                {
+                    "id": "http://dbpedia.org/resource/Spain",
+                    "label": "Spain"
+                }
+            ],
+            "label": "Iron Age",
+            "stop": {
+                "in": {
+                    "year": "-0549"
+                },
+                "label": "550 B.C."
+            },
+            "languageTag": "en",
+            "authority": "p03377f"
+        },
+        "p0d39r7d5km": {
+            "type": "Period",
+            "language": "http://lexvo.org/id/iso639-1/en",
+            "id": "p0d39r7d5km",
+            "localizedLabels": {
+                "en": [
+                    "Iron Age"
+                ]
+            },
+            "stop": {
+                "in": {
+                    "year": "0043"
+                },
+                "label": "43 A.D."
+            },
+            "start": {
+                "in": {
+                    "year": "-0799"
+                },
+                "label": "800 B.C."
+            },
+            "spatialCoverage": [
+                {
+                    "id": "http://dbpedia.org/resource/United_Kingdom",
+                    "label": "United Kingdom"
+                }
+            ],
+            "label": "Iron Age",
+            "editorialNote": "May be an inference, not statement / assertion.",
+            "spatialCoverageDescription": "Roman Britain",
+            "languageTag": "en",
+            "authority": "p0d39r7"
+        }
+    },
+    "@context": [
+        "http://n2t.net/ark:/99152/p0c",
+        {
+            "@base": "http://n2t.net/ark:/99152/"
+        }
+    ],
+    "@id": "p0bags/451e662f-11f9-42c1-8c76-d1a7581226fb",
+    "creator": "https://orcid.org/0000-0002-5486-159X"
+}
