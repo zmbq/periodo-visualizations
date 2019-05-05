@@ -7,6 +7,6 @@ function component() {
 }
 
 $(document).ready(()=> {
-    // const div = component();
+    const div = component();
     $('body').append(div);
 });
