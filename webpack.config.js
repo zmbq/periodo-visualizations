@@ -25,8 +25,8 @@ module.exports = {
             filename: './index.html',
             template: './src/index.html',
         }),
-        //new CopyPlugin([
-        //    { from: './data/*.json', to: '/assets/*', },
-        //]),
+        new CopyPlugin([
+            { from: './data', to: './data', },
+        ]),
     ]
   };
