@@ -1,0 +1,39 @@
+{
+  "name": "periodo-visualizations",
+  "version": "0.1.0",
+  "description": "Palladio visualizations for PeriodO",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zmbq/periodo-visualizations.git"
+  },
+  "keywords": [
+    "periodo",
+    "palladio"
+  ],
+  "author": "The Research Software Company",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zmbq/periodo-visualizations/issues"
+  },
+  "homepage": "https://github.com/zmbq/periodo-visualizations#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.4",
+    "copy-webpack-plugin": "^5.0.3",
+    "css-loader": "^2.1.1",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.3.1"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1"
+  }
+}
