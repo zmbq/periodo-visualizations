@@ -1,10 +1,12 @@
 'use strict';
 
 function component() {
-    const element = document.createElement('div');
-    element.innerHTML = "Hello, webpack";
-
-    return element;
+    const div = $($.parseHTML('<div></div>'));
+    div.html('Hello, webpack and jQuery');
+    return div;
 }
 
-document.body.appendChild(component());
+$(document).ready(()=> {
+    // const div = component();
+    $('body').append(div);
+});

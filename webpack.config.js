@@ -1,6 +1,7 @@
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     entry: './src/index.js',
@@ -24,6 +25,9 @@ module.exports = {
             hash: true,
             filename: './index.html',
             template: './src/index.html',
+        }),
+        new webpack.ProvidePlugin({
+          $: 'jquery',
         }),
         new CopyPlugin([
             { from: './data', to: './data', },
