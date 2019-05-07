@@ -1,3 +1,4 @@
+require('bootstrap/dist/css/bootstrap.css')
 require('./style.scss');
 
 function component() {
