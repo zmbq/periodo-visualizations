@@ -8,5 +8,5 @@ function component() {
 
 $(document).ready(() => {
     const div = component();
-    div.html("Welcome to webpack, Typescript and jQuery!");
+    div.html("Welcome to webpack, Typescript and jQuery");
 });
