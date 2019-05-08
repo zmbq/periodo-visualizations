@@ -13,7 +13,7 @@
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ],
-            "args": ["./data/"],
+            "args": ["./data/full.json", "./data/full.json", "full.csv"],
             "cwd": "${workspaceFolder}/"
         }
     ]

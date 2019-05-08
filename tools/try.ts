@@ -1,20 +1,25 @@
 import * as fs from 'fs';
-import { report } from '../src/csv/create-csv';
+import { CsvCreator } from '../src/csv/create-csv';
+import { createBrotliDecompress } from 'zlib';
 
 class Args {
-    public readonly dataPath: string;
+    public readonly fullDataPath: string;
+    public readonly periodDataPath: string;
+    public readonly csvName: string;
+
     constructor() {
-        if (process.argv.length !== 3) {
-            throw new Error('Expected exactly 1 arguments - data path');
+        if (process.argv.length !== 5) {
+            throw new Error('Expected exactly 3 arguments - full-data-file period-data-file csv-file-name');
         }
 
-        this.dataPath = process.argv[2];
+        this.fullDataPath = process.argv[2];
+        this.periodDataPath = process.argv[3];
+        this.csvName = process.argv[4];
     }
 }
 
-function readFile(dataPath, filename) {
-    const file = dataPath + '/' + filename;
-    const buffer = fs.readFileSync(file);
+function readFile(path) {
+    const buffer = fs.readFileSync(path);
     const raw = buffer.toString();
     const obj = JSON.parse(raw);
 
@@ -23,9 +28,20 @@ function readFile(dataPath, filename) {
 
 const args = new Args();
 
-const full = readFile(args.dataPath, 'full.json');
-const authority = readFile(args.dataPath, 'authority.json');
-const bag = readFile(args.dataPath, 'bag.json');
+console.log(`Loading full data from ${args.fullDataPath}`);
+const full = readFile(args.fullDataPath);
+const creator = new CsvCreator(full);
 
-console.log('try is here');
-console.log(bag);
+console.log(`Loading period data from ${args.periodDataPath}`);
+const periods = readFile(args.periodDataPath);
+
+console.log(`Writing CSV to ${args.csvName}`);
+
+const fd = fs.openSync(args.csvName, 'w');
+fs.writeSync(fd, Buffer.from(creator.csvHeader + '\n'))
+for(const row of creator.generateCsvRows(periods)) {
+    fs.writeSync(fd, Buffer.from(row + '\n'));
+}
+fs.closeSync(fd);
+
+console.log('Done');
