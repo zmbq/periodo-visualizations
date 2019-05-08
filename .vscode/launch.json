@@ -12,7 +12,9 @@
             "program": "${workspaceFolder}/tools/bin/tools/try.js",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
-            ]
+            ],
+            "args": ["./data/"],
+            "cwd": "${workspaceFolder}/"
         }
     ]
 }
