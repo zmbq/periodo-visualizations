@@ -10,6 +10,14 @@
                 "$tsc-watch"
             ],
             "isBackground": true
+        },
+        {
+            "type": "npm",
+            "script": "watch-tools",
+            "problemMatcher": [
+                "$tsc-watch"
+            ],
+            "isBackground": true
         }
     ]
 }

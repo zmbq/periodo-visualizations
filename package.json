@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development"
+    "start": "webpack-dev-server --mode development",
+    "build-tools": "tsc -p tools/tsconfig.json",
+    "watch-tools": "tsc --watch -p tools/tsconfig.json"
   },
   "repository": {
     "type": "git",
