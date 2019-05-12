@@ -1,13 +1,16 @@
 require('bootstrap/dist/css/bootstrap.css')
 require('./style.scss');
 
+ $('#submit-button').click(function() {
+   
+    var content = $('#content').val();
+    processData(content,"#leftCol")
+    var url = $('#url').val();
+    loadJson(url, "#rightCol",  processData);
+
+ });
 
 
-$(document).ready(function() {
-    loadJson("../../data/bag.json", "#leftCol",  processData);
-    loadJson("../../data/full.json", "#rightCol",  processData);
-
-});
 function  loadJson(url ,contenair,callBack){
 
     $.ajax({
