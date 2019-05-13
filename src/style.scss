@@ -3,6 +3,15 @@
 //     font-size: 5em;
 //     border: 1px solid;
 // }
+body {
+    margin-top: 10px;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
 label {
     color: blue;
 }
@@ -15,8 +24,9 @@ p p {
     margin-left: 25px;
 }
 
-.preCsv {
+.pre-csv {
+    margin-top: 10px;
     height: 65vh;
-    width: 65vw;
+    width: 100%;
     border: 2px solid black;
 }
