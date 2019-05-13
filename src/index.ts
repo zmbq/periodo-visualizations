@@ -4,27 +4,29 @@ require('bootstrap/dist/css/bootstrap.css')
 require('./style.scss');
 
 $(document).ready(function() {
-    $("#content, #url").bind('keyup', function () {
-           ($('#content').val() && $('#url').val()) ? $('#submit-button').prop('disabled', false) : $('#submit-button').prop('disabled', true);
+    $("#period-url, #full-url").bind('keyup', function () {
+        $('#submit-button').prop('disabled', !$('#period-url').val || !$('#full-url').val);
     });
 });
 
 // Disable submit button if URL and Peridos are not full
 // Show error if Periods is not a legal json (JSON.parse fails) or full is not a URL of legal JSON (download or parse fail)
  $('#submit-button').click(async () => {
-    debugger;
     $('error').html('');
     $('#submit-button').prop('disabled', true);
 
     // Read full data from URL
     // process data (both full and content)
     // Put CSV (returned from process data) in the CSV block
-    const periodsText = $('#content').val().toString();
     let periods: any;
     try {
-        periods = JSON.parse(periodsText);
+        periods = await $.ajax({
+            type: 'GET',
+            url: $('#period-url').val().toString(),
+            dataType: "json",
+        });
     } catch(e) {
-        $('#error').html("Invalid Periods JSON");
+        $('#error').html("Can't load full period data");
         return;
     }
 
@@ -32,7 +34,7 @@ $(document).ready(function() {
     try {
         full = await $.ajax({
             type: 'GET',
-            url: $('#url').val().toString(),
+            url: $('#full-url').val().toString(),
             dataType: "json",
         });
     } catch(e) {
