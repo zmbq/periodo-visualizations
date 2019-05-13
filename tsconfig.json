@@ -1,11 +1,16 @@
 {
-    "compilerOptions": {
-      "module": "commonjs",
-      "target": "es5",
-      "sourceMap": true,
-      "downlevelIteration": true
-    },
-    "exclude": [
-      "node_modules"
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true,
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "downlevelIteration": true,
+    "moduleResolution": "classic",
+    "typeRoots": [
+      "./node_modules/@types"
     ]
   }
+}

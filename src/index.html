@@ -10,15 +10,21 @@
     <div class="container">
         <div class="row">
             <div id="leftCol" class="col-5">
-                <h4> File:Bag</h4>
+                <h4> Periods JSON</h4>
                 <textarea id='content' name='content' cols="40" rows="10"></textarea>
             </div>
             <div id="rightCol" class="col-5">
-                <h4> File:Full</h4>
+                <h4>Full File URL</h4>
                 <input type='text' id='url' name='url' />
             </div>
-            <div class="col-2">
-                <input type='submit' id='submit-button' />
+            <div class="col-2 actions">
+                <!-- <input type='submit' id='submit-button' /> -->
+                <input type="submit" value="Convert to CSV" id='submit-button' disabled="disabled" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <pre class="preCsv"></pre>
             </div>
         </div>
     </div>

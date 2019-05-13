@@ -1,45 +1,47 @@
 {
-  "name": "periodo-visualizations",
-  "version": "0.1.0",
-  "description": "Palladio visualizations for PeriodO",
-  "main": "index.js",
-  "scripts": {
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development",
-    "build-tools": "tsc -p tools/tsconfig.json",
-    "watch-tools": "tsc --watch -p tools/tsconfig.json"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zmbq/periodo-visualizations.git"
-  },
-  "keywords": [
-    "periodo",
-    "palladio"
-  ],
-  "author": "The Research Software Company",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/zmbq/periodo-visualizations/issues"
-  },
-  "homepage": "https://github.com/zmbq/periodo-visualizations#readme",
-  "devDependencies": {
-    "@types/jquery": "^3.3.29",
-    "copy-webpack-plugin": "^5.0.3",
-    "css-loader": "^2.1.1",
-    "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
-    "ts-loader": "^6.0.0",
-    "tslint": "^5.16.0",
-    "typescript": "^3.4.5",
-    "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.2",
-    "webpack-dev-server": "^3.3.1"
-  },
-  "dependencies": {
-    "bootstrap": "^4.3.1",
-    "jquery": "^3.4.1"
-  }
+    "name": "periodo-visualizations",
+    "version": "0.1.0",
+    "description": "Palladio visualizations for PeriodO",
+    "main": "index.js",
+    "scripts": {
+        "build": "webpack --mode production",
+        "start": "webpack-dev-server --mode development",
+        "build-tools": "tsc -p tools/tsconfig.json",
+        "watch-tools": "tsc --watch -p tools/tsconfig.json"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zmbq/periodo-visualizations.git"
+    },
+    "keywords": [
+        "periodo",
+        "palladio"
+    ],
+    "author": "The Research Software Company",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/zmbq/periodo-visualizations/issues"
+    },
+    "homepage": "https://github.com/zmbq/periodo-visualizations#readme",
+    "devDependencies": {
+        "@types/jquery": "^3.3.29",
+        "copy-webpack-plugin": "^5.0.3",
+        "css-loader": "^2.1.1",
+        "html-webpack-plugin": "^3.2.0",
+        "node-sass": "^4.12.0",
+        "sass-loader": "^7.1.0",
+        "style-loader": "^0.23.1",
+        "ts-loader": "^6.0.0",
+        "tslint": "^5.16.0",
+        "typescript": "^3.4.5",
+        "webpack": "^4.30.0",
+        "webpack-cli": "^3.3.2",
+        "webpack-dev-server": "^3.3.1"
+    },
+    "dependencies": {
+        "bootstrap": "^4.3.1",
+        "fs": "0.0.1-security",
+        "jquery": "^3.4.1",
+        "ts-import-plugin": "^1.5.5"
+    }
 }
