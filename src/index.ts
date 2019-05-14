@@ -43,16 +43,8 @@ $(document).ready(function() {
     }
 
     const creator = new CsvCreator(full);
-
-    // We need to build a large CSV string. Building an array of strings and then using join is
-    // the fastest way according to this: https://stackoverflow.com/a/2087538/871910
-    const lines: string[] = [];
-    lines.push(creator.csvHeader);
-    for(const row of creator.generateCsvRows(periods)) {
-        lines.push(row);
-    }
-
-    const csv = lines.join('\n');
+    const csv = creator.getCsv(periods);
+    
     $('#csv').html(csv);
     $('#error').html('');
     $('#submit-button').prop('disabled', false);
