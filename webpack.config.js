@@ -8,10 +8,14 @@ const tsImportPluginFactory = require('ts-import-plugin')
 
 
 module.exports = {
-    entry: './src/index.ts',
+    entry: {
+        index: './src/index.ts',
+        convert: './src/convert.ts',
+    },
     output: {
-        path: path.resolve(__dirname, './dist'),
-        filename: 'bundle.js',
+        filename: '[name].js',
+        path: __dirname + '/dist',
+        chunkFilename: '[id].[chunkhash].js'
     },
     // externals: ["fs"],
     resolve: {
@@ -60,6 +64,13 @@ module.exports = {
             hash: true,
             filename: './index.html',
             template: './src/index.html',
+            chunks: ['index',],
+        }),
+        new HtmlWebpackPlugin({
+            hash: true,
+            filename: './convert.html',
+            template: './src/convert.html',
+            chunks: ['convert',],
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',

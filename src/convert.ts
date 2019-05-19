@@ -3,7 +3,7 @@ import { CsvCreator } from './csv/create-csv';
 require('bootstrap/dist/css/bootstrap.css')
 require('./style.scss');
 
-console.log('index.ts is here');
+console.log('convert.ts is here');
 $(document).ready(function() {
     $("#period-url, #full-url").bind('keyup', function () {
         $('#submit-button').prop('disabled', !$('#period-url').val || !$('#full-url').val);
