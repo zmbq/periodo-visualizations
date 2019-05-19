@@ -7,7 +7,8 @@
         "build": "webpack --mode production",
         "start": "webpack-dev-server --mode development",
         "build-tools": "tsc -p tools/tsconfig.json",
-        "watch-tools": "tsc --watch -p tools/tsconfig.json"
+        "watch-tools": "tsc --watch -p tools/tsconfig.json",
+        "postinstall": "bower install"
     },
     "repository": {
         "type": "git",
@@ -25,12 +26,17 @@
     "homepage": "https://github.com/zmbq/periodo-visualizations#readme",
     "devDependencies": {
         "@types/jquery": "^3.3.29",
+        "bower": "^1.8.8",
         "copy-webpack-plugin": "^5.0.3",
         "css-loader": "^2.1.1",
+        "d3": "^5.9.2",
+        "d3-geo": "^1.11.3",
+        "fs": "0.0.1-security",
         "html-webpack-plugin": "^3.2.0",
         "node-sass": "^4.12.0",
         "sass-loader": "^7.1.0",
         "style-loader": "^0.23.1",
+        "ts-import-plugin": "^1.5.5",
         "ts-loader": "^6.0.0",
         "tslint": "^5.16.0",
         "typescript": "^3.4.5",
@@ -40,8 +46,6 @@
     },
     "dependencies": {
         "bootstrap": "^4.3.1",
-        "fs": "0.0.1-security",
-        "jquery": "^3.4.1",
-        "ts-import-plugin": "^1.5.5"
+        "jquery": "^3.4.1"
     }
 }

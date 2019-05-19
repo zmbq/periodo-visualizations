@@ -20,17 +20,11 @@ module.exports = {
     // externals: ["fs"],
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: [".ts", ".tsx", ".js"]
+        extensions: [".ts", ".tsx", ".js"],
+        modules: ["node_modules", "bower_components"],
     },
     module: {
         rules: [{
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader"
-                }
-            },
-            {
                 test: /\.(tsx|ts)$/,
                 loader: 'ts-loader',
                 options: {
@@ -39,7 +33,7 @@ module.exports = {
                         module: 'es2015'
                     }
                 },
-                exclude: /node_modules/
+                exclude: [/node_modules/, /bower_components/],
             },
             {
                 test: /\.scss$/,

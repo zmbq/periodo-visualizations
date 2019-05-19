@@ -1,0 +1,26 @@
+{
+  "name": "periodo-visualizations",
+  "description": "Palladio visualizations for PeriodO",
+  "main": "index.js",
+  "authors": [
+    "The Research Software Company"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "periodo",
+    "palladio"
+  ],
+  "homepage": "https://github.com/zmbq/periodo-visualizations",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "palladio-timespan-component": "^1.1.1",
+    "palladio-map-component": "^1.2.0"
+  }
+}

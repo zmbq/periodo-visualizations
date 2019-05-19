@@ -1,9 +1,15 @@
 // import * as fs from 'fs';
 import { CsvCreator } from './csv/create-csv';
+import * as palladio from 'palladio/palladio';
 require('bootstrap/dist/css/bootstrap.css')
 require('./style.scss');
 
-console.log('index.ts is here');
+let csv: string = '';
+let periods = undefined;
+
+// console.log(palladio);
+// const components = palladio.startPalladio(['palladioMapComponent', 'palladioTimeSpanComponent',]);
+
 $(document).ready(function() {
     $("#period-url, #full-url").bind('keyup', function () {
         $('#submit-button').prop('disabled', !$('#period-url').val || !$('#full-url').val);
@@ -19,7 +25,6 @@ $(document).ready(function() {
     // Read full data from URL
     // process data (both full and content)
     // Put CSV (returned from process data) in the CSV block
-    let periods: any;
     try {
         periods = await $.ajax({
             type: 'GET',
@@ -44,9 +49,11 @@ $(document).ready(function() {
     }
 
     const creator = new CsvCreator(full);
-    const csv = creator.getCsv(periods);
+    csv = creator.getCsv(periods);
     
-    $('#csv').html(csv);
-    $('#error').html('');
     $('#submit-button').prop('disabled', false);
+    visualize();
  });
+
+ function visualize() {
+ }
