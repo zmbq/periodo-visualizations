@@ -71,6 +71,9 @@ module.exports = {
         }),
         new CopyPlugin([
             { from: './data', to: './data', },
+            { from: './bower_components/palladio', to: './assets/palladio', },
+            { from: './bower_components/palladio-map-component', to: './assets/palladio-map-component', },
+            { from: './bower_components/palladio-timespan-component', to: './assets/palladio-timespan-component', },
         ]),
     ]
 };

@@ -1,14 +1,15 @@
 // import * as fs from 'fs';
 import { CsvCreator } from './csv/create-csv';
-import * as palladio from 'palladio/palladio';
 require('bootstrap/dist/css/bootstrap.css')
 require('./style.scss');
 
-let csv: string = '';
 let periods = undefined;
+let csv: string = undefined;
 
-// console.log(palladio);
-// const components = palladio.startPalladio(['palladioMapComponent', 'palladioTimeSpanComponent',]);
+declare const startPalladio;
+const components = startPalladio(['palladioMapComponent', 'palladioTimespanComponent',]);
+
+console.log(components);
 
 $(document).ready(function() {
     $("#period-url, #full-url").bind('keyup', function () {
@@ -49,11 +50,31 @@ $(document).ready(function() {
     }
 
     const creator = new CsvCreator(full);
+    creator.enhancePeriods(periods);
     csv = creator.getCsv(periods);
     
     $('#submit-button').prop('disabled', false);
     visualize();
- });
+});
 
- function visualize() {
- }
+function visualize() {
+    // Build the JSON required by palladio
+    const palladioInput = { version: "0.9.0", files: [csv] };
+    components.loadJson(palladioInput);
+    const timespan = components.add('timespan', '#timespan', {
+        showControls: false,
+        showSettings: false,
+        showAccordion: false
+    });
+
+    const setTimespan = () => {
+        const dim = components.dimensions();
+        console.log(dim);
+        const options = components.getOptions();
+        console.log(options);
+
+        options.startDimension(dim.filter((d) => d.earliestStartDate));
+        options.endDimension(dim.filter((d) => d.lastestStopDate));
+    }
+    setTimeout(setTimespan, 200);
+}
