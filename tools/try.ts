@@ -1,6 +1,5 @@
 import * as fs from 'fs';
-import { CsvCreator } from '../src/csv/create-csv';
-import { createBrotliDecompress } from 'zlib';
+import { CsvCreator } from '../src/logic/create-csv';
 
 class Args {
     public readonly fullDataPath: string;
