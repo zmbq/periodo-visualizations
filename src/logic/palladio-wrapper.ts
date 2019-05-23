@@ -67,184 +67,261 @@ export class PalladioWrapper {
 }
 
 const csvSaveTemplate = {
-    "version": "1.2.9",
-    "files": [
-        {
-            "loadFromURL": false,
-            "label": "Untitled",
-            "id": 0,
-            "autoFields": [],
-            "fields": [
-                {
-                    "key": "author",
-                    "description": "author",
-                    "cardinality": 2,
-                    "type": "text",
-                    "blanks": 0,
-                    "uniques": [],
-                    "uniqueKey": true,
-                    "special": [
-                        ","
-                    ],
-                    "unassignedSpecialChars": [
-                        ","
-                    ],
-                    "countBy": true,
-                    "errors": [],
-                    "$$hashKey": "object:116"
-                },
-                {
-                    "key": "publication year",
-                    "description": "publication year",
-                    "cardinality": 2,
-                    "type": "date",
-                    "blanks": 0,
-                    "uniques": [],
-                    "uniqueKey": true,
-                    "special": [],
-                    "unassignedSpecialChars": [],
-                    "countBy": false,
-                    "errors": [],
-                    "descriptiveField": "author",
-                    "$$hashKey": "object:117"
-                },
-                {
-                    "key": "label",
-                    "description": "label",
-                    "cardinality": 1,
-                    "type": "text",
-                    "blanks": 0,
-                    "uniques": [],
-                    "uniqueKey": false,
-                    "special": [],
-                    "unassignedSpecialChars": [],
-                    "countBy": false,
-                    "errors": [],
-                    "descriptiveField": "author",
-                    "$$hashKey": "object:118"
-                },
-                {
-                    "key": "spatial URIs",
-                    "description": "spatial URIs",
-                    "cardinality": 2,
-                    "type": "url",
-                    "blanks": 0,
-                    "uniques": [],
-                    "uniqueKey": true,
-                    "special": [
-                        ":",
-                        "/",
-                        "_"
-                    ],
-                    "unassignedSpecialChars": [],
-                    "countBy": false,
-                    "errors": [],
-                    "descriptiveField": "author",
-                    "$$hashKey": "object:119"
-                },
-                {
-                    "key": "earliest start",
-                    "description": "earliest start",
-                    "cardinality": 1,
-                    "type": "number",
-                    "blanks": 0,
-                    "uniques": [],
-                    "uniqueKey": false,
-                    "special": [
-                        "-"
-                    ],
-                    "unassignedSpecialChars": [
-                        "-"
-                    ],
-                    "countBy": false,
-                    "errors": [],
-                    "descriptiveField": "author",
-                    "$$hashKey": "object:120"
-                },
-                {
-                    "key": "latest stop",
-                    "description": "latest stop",
-                    "cardinality": 2,
-                    "type": "number",
-                    "blanks": 0,
-                    "uniques": [],
-                    "uniqueKey": true,
-                    "special": [
-                        "-"
-                    ],
-                    "unassignedSpecialChars": [
-                        "-"
-                    ],
-                    "countBy": false,
-                    "errors": [],
-                    "descriptiveField": "author",
-                    "$$hashKey": "object:121"
-                },
-                {
-                    "key": "URI",
-                    "description": "URI",
-                    "cardinality": 2,
-                    "type": "url",
-                    "blanks": 0,
-                    "uniques": [],
-                    "uniqueKey": true,
-                    "special": [
-                        ":",
-                        "/"
-                    ],
-                    "unassignedSpecialChars": [],
-                    "countBy": false,
-                    "errors": [],
-                    "descriptiveField": "author",
-                    "$$hashKey": "object:122"
-                },
-                {
-                    "key": "derived URIs",
-                    "description": "derived URIs",
-                    "cardinality": 0,
-                    "type": "null",
-                    "blanks": 2,
-                    "uniques": [],
-                    "uniqueKey": false,
-                    "special": [],
-                    "unassignedSpecialChars": [],
-                    "countBy": false,
-                    "errors": [],
-                    "descriptiveField": "author",
-                    "$$hashKey": "object:123"
-                }
-            ],
-            "data": [
-                {
-                    "author": "Ruiz, Arturo.",
-                    "publication year": "1998",
-                    "label": "Iron Age",
-                    "spatial URIs": "http://dbpedia.org/resource/Spain",
-                    "earliest start": "-799",
-                    "latest stop": "-549",
-                    "URI": "http://n2t.net/ark:/99152/p03377fkhrv"
-                },
-                {
-                    "author": "Salway, Peter.",
-                    "publication year": "1993",
-                    "label": "Iron Age",
-                    "spatial URIs": "http://dbpedia.org/resource/United_Kingdom",
-                    "earliest start": "-799",
-                    "latest stop": "43",
-                    "URI": "http://n2t.net/ark:/99152/p0d39r7d5km"
-                }
-            ],
-            "uniqueId": 0,
-            "$$hashKey": "object:110"
-        }
-    ],
-    "links": [],
-    "layout": "geo",
-    "metadata": {
-        "title": null,
-        "author": null,
-        "date": null,
-        "description": null
-    },
-    "vis": []
+	"version": "1.2.9",
+	"files": [
+		{
+			"loadFromURL": false,
+			"label": "Untitled",
+			"id": 0,
+			"autoFields": [],
+			"fields": [
+				{
+					"key": "author",
+					"description": "author",
+					"cardinality": 47,
+					"type": "text",
+					"blanks": 21,
+					"uniques": [],
+					"uniqueKey": false,
+					"special": [
+						",",
+						"-",
+						":"
+					],
+					"unassignedSpecialChars": [
+						",",
+						"-",
+						":"
+					],
+					"countBy": false,
+					"errors": [],
+					"descriptiveField": "URI",
+					"$$hashKey": "object:116"
+				},
+				{
+					"key": "publication year",
+					"description": "publication year",
+					"cardinality": 29,
+					"type": "date",
+					"blanks": 40,
+					"uniques": [],
+					"uniqueKey": false,
+					"special": [],
+					"unassignedSpecialChars": [],
+					"countBy": false,
+					"errors": [],
+					"descriptiveField": "URI",
+					"$$hashKey": "object:117"
+				},
+				{
+					"key": "label",
+					"description": "label",
+					"cardinality": 1554,
+					"type": "text",
+					"blanks": 0,
+					"uniques": [],
+					"uniqueKey": false,
+					"special": [
+						"-",
+						"/",
+						":",
+						",",
+						"?",
+						";"
+					],
+					"unassignedSpecialChars": [
+						"-",
+						"/",
+						":",
+						",",
+						"?",
+						";"
+					],
+					"countBy": false,
+					"errors": [],
+					"descriptiveField": "URI",
+					"$$hashKey": "object:118"
+				},
+				{
+					"key": "spatial URIs",
+					"description": "spatial URIs",
+					"cardinality": 97,
+					"type": "url",
+					"blanks": 284,
+					"uniques": [],
+					"uniqueKey": false,
+					"special": [
+						":",
+						",",
+						"/",
+						"_"
+					],
+					"unassignedSpecialChars": [
+						","
+					],
+					"countBy": false,
+					"errors": [],
+					"descriptiveField": "URI",
+					"$$hashKey": "object:119"
+				},
+				{
+					"key": "earliest start",
+					"description": "earliest start",
+					"cardinality": 634,
+					"type": "date",
+					"blanks": 9,
+					"uniques": [],
+					"uniqueKey": false,
+					"special": [
+						"-"
+					],
+					"unassignedSpecialChars": [],
+					"countBy": false,
+					"errors": [],
+					"descriptiveField": "URI",
+					"$$hashKey": "object:120"
+				},
+				{
+					"key": "latest stop",
+					"description": "latest stop",
+					"cardinality": 726,
+					"type": "date",
+					"blanks": 4,
+					"uniques": [],
+					"uniqueKey": false,
+					"special": [
+						"-"
+					],
+					"unassignedSpecialChars": [],
+					"countBy": false,
+					"errors": [],
+					"descriptiveField": "URI",
+					"$$hashKey": "object:121"
+				},
+				{
+					"key": "URI",
+					"description": "URI",
+					"cardinality": 2126,
+					"type": "url",
+					"blanks": 0,
+					"uniques": [],
+					"uniqueKey": true,
+					"special": [
+						":",
+						"/"
+					],
+					"unassignedSpecialChars": [],
+					"countBy": true,
+					"errors": [],
+					"$$hashKey": "object:122",
+					"countable": true,
+					"countDescription": "Untitled"
+				},
+				{
+					"key": "derived URIs",
+					"description": "derived URIs",
+					"cardinality": 319,
+					"type": "url",
+					"blanks": 1786,
+					"uniques": [],
+					"uniqueKey": false,
+					"special": [
+						":",
+						"/"
+					],
+					"unassignedSpecialChars": [],
+					"countBy": false,
+					"errors": [],
+					"descriptiveField": "URI",
+					"$$hashKey": "object:123"
+				}
+			],
+			data: [],
+			"uniqueId": 0,
+			"$$hashKey": "object:110"
+		}
+	],
+	"links": [],
+	"layout": "graph",
+	"metadata": {
+		"title": null,
+		"author": null,
+		"date": null,
+		"description": null
+	},
+	"vis": [
+		{
+			"type": "palladioFilters",
+			"importJson": {
+				"facets": [],
+				"timelines": [],
+				"partimes": [
+					{
+						"title": "Time Span Filter",
+						"dateStartDim": "earliest start",
+						"dateEndDim": "latest stop",
+						"tooltipLabelDim": "label",
+						"topExtent": [
+							"-9999-01-01",
+							"-9999-01-01"
+						],
+						"midExtent": [
+							"-9999-01-01",
+							"-9999-01-01"
+						],
+						"bottomExtent": [
+							"-9999-01-01",
+							"-9999-01-01"
+						],
+						"mode": "Bars"
+					}
+				],
+				"timesteps": []
+			}
+		},
+		{
+			"type": "graphView",
+			"importJson": {
+				"showLinks": true,
+				"showLabels": true,
+				"aggregateKey": null,
+				"aggregationType": "COUNT",
+				"nodeSize": false,
+				"highlightSource": false,
+				"highlightTarget": false,
+				"aggDimKey": "URI",
+				"sourceDimension": null,
+				"targetDimension": null,
+				"fixedNodes": false
+			}
+		},
+		{
+			"type": "mapView",
+			"importJson": {
+				"tileSets": [
+					{
+						"url": null,
+						"mbId": "cesta.hd9ak6ie",
+						"enabled": true,
+						"description": "Land"
+					}
+				],
+				"layers": []
+			}
+		},
+		{
+			"type": "tableView",
+			"importJson": {
+				"tableDimensions": [],
+				"countDim": null,
+				"maxDisplay": 1000
+			}
+		},
+		{
+			"type": "listView",
+			"importJson": {
+				"titleDim": "URI"
+			}
+		}
+	]
 }

@@ -52,12 +52,13 @@ $(document).ready(function() {
     creator.enhancePeriods(periodData);
     periods = Array.from(creator.iteratePeriods(periodData));
     
-    $('#submit-button').prop('disabled', false);
+    // $('#submit-button').prop('disabled', false);
     visualize();
 });
 
 function visualize() {
     // Build the JSON required by palladio
+    periods.reverse();
     const palladioData = wrapper.preparePalladioData(periods);
     wrapper.loadData(palladioData);
     const timespan = wrapper.addComponent('timespan', '#timespan', {
@@ -69,12 +70,13 @@ function visualize() {
     // dimensions will only be ready after Angular (which is used by Palladio) completes its own
     // cycle. So we need to wait a little bit with setTimeout before accessing it.
     const setTimespan = () => {
-        const dim = wrapper.components.dimensions();
+        const comps = wrapper.components;
         const options = timespan.getOptions();
 
-        options.startDimension(dim.filter((d) => d.key == 'earliest start')[0]);
-        options.endDimension(dim.filter((d) => d.key == 'latest stop')[0]);
-        options.groupDimension(dim.filter((d) => d.key == 'label')[0]);
+        options.startDimension(comps.dimensionFromKey('earliest start'));
+        options.endDimension(comps.dimensionFromKey('latest stop'));
+        options.tooltipDimension(comps.dimensionFromKey('label'));
+        options.labelDimension(comps.dimensionFromKey('label'));
     }
     setTimeout(setTimespan, 200);
 }
