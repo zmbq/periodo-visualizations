@@ -1,7 +1,7 @@
 // import * as fs from 'fs';
 import { CsvCreator } from './logic/create-csv';
 require('bootstrap/dist/css/bootstrap.css')
-require('./style.scss');
+require('./convert.scss');
 
 console.log('convert.ts is here');
 $(document).ready(function() {

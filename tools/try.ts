@@ -37,7 +37,7 @@ const periods = readFile(args.periodDataPath);
 console.log(`Writing CSV to ${args.csvName}`);
 
 const fd = fs.openSync(args.csvName, 'w');
-fs.writeSync(fd, Buffer.from(creator.csvHeader + '\n'))
+fs.writeSync(fd, Buffer.from(CsvCreator.csvHeader + '\n'))
 for(const row of creator.generateCsvRows(periods)) {
     fs.writeSync(fd, Buffer.from(row + '\n'));
 }

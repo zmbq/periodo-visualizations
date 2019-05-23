@@ -28,17 +28,22 @@ export interface PeriodProperties {
 
 /* To speed up processing, we map the full period data before once. AuthorityProperties are properties
    of an authority (which another name for a collection) */
-interface AuthorityProperties {
+export interface AuthorityProperties {
     id: string;
     yearPublished: number | undefined;
     authors: string;
 }
 
 /* Instead of just moving rows around, we return CsvData objects. This allows callers to access the inividual properties */
-interface CsvData {
+export interface CsvData {
     properties: PeriodProperties,
+    rowAsArray: string[],
     row: string,
 }
+
+export interface EnhancedPeriod {
+    csv: CsvData
+};
 
 /*
  * This is the main class in this module.
@@ -277,13 +282,14 @@ export class CsvCreator {
 
         return {
             properties: props,
+            rowAsArray: fields,
             row
         } as CsvData;
     }
 
     // Returns the headers for the CSV.
     // Note: the order has to be identical to the order of the fields[] array in getCsvData
-    public get csvHeader() {
+    public static get csvHeader() {
         return "author,publication year,label,spatial URIs,earliest start,latest stop,URI,derived URIs";
     }
 
@@ -311,7 +317,7 @@ export class CsvCreator {
         // the fastest way according to this: https://stackoverflow.com/a/2087538/871910
         const lines: string[] = [];
         
-        lines.push(this.csvHeader);
+        lines.push(CsvCreator.csvHeader);
         for(const row of this.generateCsvRows(data)) {
             lines.push(row);
         }

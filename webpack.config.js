@@ -70,7 +70,8 @@ module.exports = {
             $: 'jquery',
         }),
         new CopyPlugin([
-            { from: './data', to: './data', },
+            { from: './data', to: './data', }, // Copy our data files
+            // We have to copy the Palladio files, so that they can be accessed from <script> tags
             { from: './bower_components/palladio', to: './assets/palladio', },
             { from: './bower_components/palladio-map-component', to: './assets/palladio-map-component', },
             { from: './bower_components/palladio-timespan-component', to: './assets/palladio-timespan-component', },
