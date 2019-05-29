@@ -4,19 +4,7 @@ import { PlaceProcessor } from './logic/places';
 require('bootstrap/dist/css/bootstrap.css')
 require('./convert.scss');
 
-console.log('convert.ts is here');
-$(document).ready(function() {
-    $("#period-url, #full-url, #places-url").bind('keyup', function () {
-        $('#submit-button').prop('disabled', !$('#period-url').val || !$('#full-url').val || !$("#places-url").val);
-    });
-});
-
-// Disable submit button if URL and Peridos are not full
-// Show error if Periods is not a legal json (JSON.parse fails) or full is not a URL of legal JSON (download or parse fail)
- $('#submit-periods').click(submitPeriods());
- $('#submit-map').click(submitMap());
- 
- let periodData: any, full: any, places: PlaceProcessor, createor: CsvCreator;
+ let periods: any, full: any, places: PlaceProcessor, creator: CsvCreator;
 
  async function loadEverything() {
     $('error').html('');
@@ -27,7 +15,7 @@ $(document).ready(function() {
     // process data (both full and content)
     // Put CSV (returned from process data) in the CSV block
     try {
-        periodData = await $.ajax({
+        periods = await $.ajax({
             type: 'GET',
             url: $('#period-url').val().toString(),
             dataType: "json",
@@ -86,3 +74,16 @@ $(document).ready(function() {
      $('#csv').html(csv);
  }
 
+
+ $(document).ready(function() {
+    $("#period-url, #full-url, #places-url").bind('keyup', function () {
+        const disabled  =!$('#period-url').val || !$('#full-url').val || !$('#places-url').val;
+        $('#submit-periods').prop('disabled', disabled);
+        $('#submit-map').prop('disabled', disabled);
+    });
+
+    // Disable submit button if URL and Peridos are not full
+    // Show error if Periods is not a legal json (JSON.parse fails) or full is not a URL of legal JSON (download or parse fail)
+    $('#submit-periods').on('click', submitPeriods);
+    $('#submit-map').on('click', submitMap);
+});

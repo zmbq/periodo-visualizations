@@ -16,6 +16,7 @@ class PlaceInfo {
         this.coordinates = json.geometry.geometries.coordinates;
 
         if (!this.coordinates) {
+            debugger;
             console.error('No coordinates in ', json);
             throw Error("No coordinates in " + json.id);
         }
@@ -85,7 +86,7 @@ export class PlaceProcessor {
         return result;
     }
 
-    public *generateLocationProperties(periods: IterableIterator<PeriodProperties>): IterableIterator<LocationProperties> {
+    public *generateLocationProperties(periods: IterableIterator<PeriodProperties>): IterableIterator<PeriodLocationProperties> {
         for(const period of periods) {
             const locations = this.createLocationProperties(period);
             for(const location of locations) {
