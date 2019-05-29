@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Frontend",
-            "url": "http://localhost:8080/convert.html",
+            "url": "http://localhost:8080/index.html",
             "webRoot": "${workspaceFolder}/src"
         },
         {

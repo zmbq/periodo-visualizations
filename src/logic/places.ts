@@ -46,7 +46,7 @@ class PlaceInfo {
 
         sum[0] /= this.coordinates.length;
         sum[1] /= this.coordinates.length;
-        this.middlePoint = sum;
+        this.middlePoint = [sum[1], sum[0]]; // PeriodO data in lon/lat, Palladio wants lat/lon
     }
 }
 
@@ -56,6 +56,7 @@ export interface PeriodLocationProperties {
     spatialURI: string,
     name: string,
     middlePoint: number[],
+    rowAsArray?: string[],
 }
 
 
@@ -103,13 +104,15 @@ export class PlaceProcessor {
         return result;
     }
 
-    public *generateLocationProperties(periods: IterableIterator<any>): IterableIterator<PeriodLocationProperties> {
+    public *generateLocationProperties(periods: IterableIterator<any> | any[]): IterableIterator<PeriodLocationProperties> {
         for(const period of periods) {
             if (!period.csv) {
+                console.error('Unenhanced period ', period);
                 throw new Error('generateLocationProperties called with unenhanced properties');
             }
             const locations = this.createLocationProperties(period.csv.properties);
             for(const location of locations) {
+                location.rowAsArray = this.createLocationRowFields(location);
                 yield location;
             }
         }
@@ -119,22 +122,28 @@ export class PlaceProcessor {
         return "period URI,label,earliest start,latest stop,spatial URI,place name,coordinates";
     }
 
-    public *generateCsvRows(periods: IterableIterator<any>): IterableIterator<string> {
+    private createLocationRowFields(location: PeriodLocationProperties): any[] {
+        const fields = [location.period.URI, 
+            location.period.label, 
+            location.period.earliestStartDate, 
+            location.period.latestStopDate, 
+            location.spatialURI,
+            location.name,
+            location.middlePoint];
+        return fields;
+    }
+
+    public *generateCsvRows(periods: IterableIterator<any> | any[]): IterableIterator<string> {
         for(const location of this.generateLocationProperties(periods)) {
-            const fields = [location.period.URI, 
-                location.period.label, 
-                location.period.earliestStartDate, 
-                location.period.latestStopDate, 
-                location.spatialURI,
-                location.name,
-                location.middlePoint];
+            const fields = this.createLocationRowFields(location);
             const sanitized = fields.map((field) => sanitizeCsvField(field));
             const row = sanitized.join(',');
+    
             yield row;
         }
     }
 
-    public getCsv(periods: IterableIterator<any>): string {
+    public getCsv(periods: IterableIterator<any> | any[]): string {
         const lines: string[] = [];
 
         lines.push(PlaceProcessor.csvHeader);

@@ -1,25 +1,30 @@
 // import * as fs from 'fs';
 import { CsvCreator, EnhancedPeriod } from './logic/create-csv';
-import { PalladioWrapper } from './logic/palladio-wrapper';
+import { PalladioWrapper, TimespanConverter, MapConverter } from './logic/palladio-wrapper';
+import { PlaceProcessor, PeriodLocationProperties } from './logic/places';
 
 require('bootstrap/dist/css/bootstrap.css')
 require('./index.scss');
 
 let periods: EnhancedPeriod[] = undefined;
+let places: PeriodLocationProperties[] = undefined;
 
 const wrapper = new PalladioWrapper();
 
 $(document).ready(function() {
     $("#period-url, #full-url, #places-url").bind('keyup', function () {
-        $('#submit-button').prop('disabled', !$('#period-url').val || !$('#full-url').val || !$("places-url").val);
+        $("input").prop('disabled', !$('#period-url').val || !$('#full-url').val || !$("places-url").val);
     });
 });
 
 // Disable submit button if URL and Peridos are not full
 // Show error if Periods is not a legal json (JSON.parse fails) or full is not a URL of legal JSON (download or parse fail)
- $('#submit-button').click(async () => {
+$('#submit-timespan').on('click', submitTimespan);
+$('#submit-map').on('click', submitMap);
+
+async function loadEverything() {
     $('error').html('');
-    $('#submit-button').prop('disabled', true);
+    $('input').prop('disabled', true);
 
     // Read full data from URL
     // process data (both full and content)
@@ -50,9 +55,9 @@ $(document).ready(function() {
         return;
     }
 
-    let places: any;
+    let placeData: any;
     try {
-        places = await $.ajax({
+        placeData = await $.ajax({
             type: 'GET',
             url: $('#places-url').val().toString(),
             dataType: "json",
@@ -66,17 +71,18 @@ $(document).ready(function() {
     const creator = new CsvCreator(full);
     creator.enhancePeriods(periodData);
     periods = Array.from(creator.iteratePeriods(periodData));
-    
-    // $('#submit-button').prop('disabled', false);
-    visualize();
-});
+ 
+    const placeProcessor = new PlaceProcessor(placeData);
+    places = Array.from(placeProcessor.generateLocationProperties(periods));
+}
 
-function visualize() {
-    // Build the JSON required by palladio
-    periods.reverse();
-    const palladioData = wrapper.preparePalladioData(periods);
+async function submitTimespan() {
+    await loadEverything();
+
+    const palladioData = TimespanConverter.convertToPalladio(periods);
+    console.log(palladioData);
     wrapper.loadData(palladioData);
-    const timespan = wrapper.addComponent('timespan', '#timespan', {
+    const timespan = wrapper.addComponent('timespan', '#palladio', {
         showControls: false,
         showSettings: false,
         showAccordion: false
@@ -95,4 +101,16 @@ function visualize() {
         // options.labelDimension(comps.dimensionFromKey('label'));
     }
     setTimeout(setTimespan, 200);
+}
+
+async function submitMap() {
+    await loadEverything();
+
+    console.log('places', places);
+    const palladioData = MapConverter.convertToPalladio(places);
+    console.log('Loading data', palladioData);
+    wrapper.loadData(palladioData);
+    const map = wrapper.addComponent('map', '#palladio', {
+        showSettings: false,
+    });
 }
