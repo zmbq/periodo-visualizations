@@ -323,6 +323,7 @@ export function sanitizeCsvField(field) {
     // We place quotes around fields
     // We also need to escape quotes inside the field, so we replace quotes with double quotes
     // See here: https://stackoverflow.com/a/46638833/871910
+    field = field.toString();
     const doubleQuotes = field.replace(/"/g,'""');
     return `"${doubleQuotes}"`;
 }

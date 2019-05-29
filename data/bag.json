@@ -20,7 +20,7 @@
             },
             "spatialCoverage": [
                 {
-                    "id": "http://dbpedia.org/resource/Spain",
+                    "id": "http://www.wikidata.org/entity/Q29",
                     "label": "Spain"
                 }
             ],
@@ -57,7 +57,7 @@
             },
             "spatialCoverage": [
                 {
-                    "id": "http://dbpedia.org/resource/United_Kingdom",
+                    "id": "http://www.wikidata.org/entity/Q145",
                     "label": "United Kingdom"
                 }
             ],

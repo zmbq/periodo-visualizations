@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Frontend",
-            "url": "http://localhost:8080",
+            "url": "http://localhost:8080/convert.html",
             "webRoot": "${workspaceFolder}/src"
         },
         {
@@ -19,7 +19,7 @@
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ],
-            "args": ["./data/full.json", "./data/full.json", "full.csv"],
+            "args": ["./data/full.json", "./data/places.json", "./data/bag.json", "full.csv", "map.csv"],
             "cwd": "${workspaceFolder}/"
         }
     ]

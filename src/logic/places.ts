@@ -1,6 +1,7 @@
 import { stringify } from "querystring";
 import { PeriodProperties, sanitizeCsvField } from "./create-csv";
 
+class IgnorePlaceError { }
 class PlaceInfo {
     public id: string;
     public coordinates: number[][];
@@ -13,10 +14,20 @@ class PlaceInfo {
             throw Error("Can't find id for PlaceInfo");
         }
 
-        this.coordinates = json.geometry.geometries.coordinates;
+        const geometries = json.geometry.geometries;
+        if (geometries.length != 1) {
+            console.error(`Number of geometries of ${json.id}: ${geometries.length}`);
+            throw Error('Expected 1 geometry in ' + json.id);
+        }
 
+        if(geometries[0].type !== 'Polygon') {
+            console.warn(`Place ${json.id} has an unsupportd geometry type ${geometries[0].type}`);
+            throw new IgnorePlaceError();
+        }
+
+        const coordinateArray = geometries[0].coordinates;
+        this.coordinates = coordinateArray[0];  // In case of a multipolygon, take the center of the first polygon
         if (!this.coordinates) {
-            debugger;
             console.error('No coordinates in ', json);
             throw Error("No coordinates in " + json.id);
         }
@@ -24,13 +35,13 @@ class PlaceInfo {
         // Find middle point
 
         const sum = [0, 0];
-        for(let coord in this.coordinates) {
+        for(let coord of this.coordinates) {
             if (coord.length!=2) {
                 console.error('Badly formatted coordinates in ', json);
                 throw Error("Badly formatted coordinates in " + json.id);
             }
-            sum[0] += parseInt(coord[0]);
-            sum[1] += parseInt(coord[1]);
+            sum[0] += coord[0];
+            sum[1] += coord[1];
         }
 
         sum[0] /= this.coordinates.length;
@@ -59,8 +70,12 @@ export class PlaceProcessor {
 
             // Locations are stored in graph/features
             for(const feature of graph.features) {
-                const pi = new PlaceInfo(feature);
-                this.placeMap.set(pi.id, pi);
+                try {
+                    const pi = new PlaceInfo(feature);
+                    this.placeMap.set(pi.id, pi);
+                } catch(e) {
+                    continue;  // Swallow this bad place and move on
+                }
             }
         }
 
@@ -86,9 +101,12 @@ export class PlaceProcessor {
         return result;
     }
 
-    public *generateLocationProperties(periods: IterableIterator<PeriodProperties>): IterableIterator<PeriodLocationProperties> {
+    public *generateLocationProperties(periods: IterableIterator<any>): IterableIterator<PeriodLocationProperties> {
         for(const period of periods) {
-            const locations = this.createLocationProperties(period);
+            if (!period.csv) {
+                throw new Error('generateLocationProperties called with unenhanced properties');
+            }
+            const locations = this.createLocationProperties(period.csv.properties);
             for(const location of locations) {
                 yield location;
             }
@@ -99,7 +117,7 @@ export class PlaceProcessor {
         return "URI,label,earliest start,latest stop,spatialURI,coordinates";
     }
 
-    public *generateCsvRows(periods: IterableIterator<PeriodProperties>): IterableIterator<string> {
+    public *generateCsvRows(periods: IterableIterator<any>): IterableIterator<string> {
         for(const location of this.generateLocationProperties(periods)) {
             const fields = [location.period.URI, 
                 location.period.label, 
@@ -113,7 +131,7 @@ export class PlaceProcessor {
         }
     }
 
-    public getCsv(periods: IterableIterator<PeriodProperties>): string {
+    public getCsv(periods: IterableIterator<any>): string {
         const lines: string[] = [];
 
         lines.push(PlaceProcessor.csvHeader);
