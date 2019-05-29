@@ -13,13 +13,18 @@
  * 
  */
 
+ export interface SpatialInfo {
+     uri: string,
+     label: string,
+ }
+
  /* The PeriodPeroperties interface contains all the data we need to generate the CSV line.
     We have kept some properties as arrays. We combine them when generating the actual CSV row */
 export interface PeriodProperties {
     collectionAuthor: string,
     collectionPublicationYear: number | undefined,
     label: string,
-    spatialURIs: string[],
+    spatialCoverage: SpatialInfo[],
     earliestStartDate?: number,
     latestStopDate?: number,
     URI: string,
@@ -194,12 +199,17 @@ export class CsvCreator {
             return period.label;
         }
 
-        function getSpatialURIs(): string[] {
+        function getSpatialCoverage(): SpatialInfo[] {
             if (!period.spatialCoverage) { // Some periods do not have spatial information
                 return [];
             }
 
-            return period.spatialCoverage.map((sc:any) => sc.id);
+            return period.spatialCoverage.map((sc:any) => {
+                return {
+                    uri: sc.id,
+                    label: sc.label,
+                } as SpatialInfo;
+            });
         }
 
         function getEarliestStartDate() {
@@ -240,7 +250,7 @@ export class CsvCreator {
             collectionAuthor: authority.authors,
             collectionPublicationYear: authority.yearPublished,
             label: getLabel(),
-            spatialURIs: getSpatialURIs(),
+            spatialCoverage: getSpatialCoverage(),
             earliestStartDate: getEarliestStartDate(),
             latestStopDate: getLatestStopDate(),
             URI: this.getPeriodURI(period.id),
@@ -259,7 +269,7 @@ export class CsvCreator {
             props.collectionAuthor,
             props.collectionPublicationYear ? props.collectionPublicationYear.toString() : '',
             props.label,
-            props.spatialURIs.join(','),
+            props.spatialCoverage.map(sc => sc.uri).join(','),
             props.earliestStartDate ? props.earliestStartDate.toString() : '',
             props.latestStopDate ? props.latestStopDate.toString() : '',
             props.URI,
@@ -323,6 +333,9 @@ export function sanitizeCsvField(field) {
     // We place quotes around fields
     // We also need to escape quotes inside the field, so we replace quotes with double quotes
     // See here: https://stackoverflow.com/a/46638833/871910
+    if (field == null) { // Checks both null and undefined https://stackoverflow.com/a/28984306
+        return '';
+    }
     field = field.toString();
     const doubleQuotes = field.replace(/"/g,'""');
     return `"${doubleQuotes}"`;

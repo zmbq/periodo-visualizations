@@ -54,6 +54,7 @@ class PlaceInfo {
 export interface PeriodLocationProperties {
     period: PeriodProperties,
     spatialURI: string,
+    name: string,
     middlePoint: number[],
 }
 
@@ -85,14 +86,15 @@ export class PlaceProcessor {
     public createLocationProperties(period: PeriodProperties): PeriodLocationProperties[] {
         const result = [] as PeriodLocationProperties[];
 
-        for(const uri of period.spatialURIs) {
-            const place = this.placeMap.get(uri);
+        for(const spatialInfo of period.spatialCoverage) {
+            const place = this.placeMap.get(spatialInfo.uri);
             if (!place) {
-                console.warn(`Can't locate place for ${uri}`);
+                console.warn(`Can't locate place for ${spatialInfo.uri}`);
             } else {
                 result.push({
                     period,
-                    spatialURI: uri,
+                    spatialURI: spatialInfo.uri,
+                    name: spatialInfo.label,
                     middlePoint: place.middlePoint,
                 });
             }
@@ -114,7 +116,7 @@ export class PlaceProcessor {
     }
 
     public static get csvHeader() {
-        return "URI,label,earliest start,latest stop,spatialURI,coordinates";
+        return "period URI,label,earliest start,latest stop,spatial URI,place name,coordinates";
     }
 
     public *generateCsvRows(periods: IterableIterator<any>): IterableIterator<string> {
@@ -123,7 +125,8 @@ export class PlaceProcessor {
                 location.period.label, 
                 location.period.earliestStartDate, 
                 location.period.latestStopDate, 
-                location.spatialURI, 
+                location.spatialURI,
+                location.name,
                 location.middlePoint];
             const sanitized = fields.map((field) => sanitizeCsvField(field));
             const row = sanitized.join(',');
