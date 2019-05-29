@@ -70,6 +70,8 @@ require('./convert.scss');
 
  async function submitMap() {
      await loadEverything();
+     
+     creator.enhancePeriods(periods);
      const csv = places.getCsv(creator.iteratePeriods(periods));
      $('#csv').html(csv);
  }
