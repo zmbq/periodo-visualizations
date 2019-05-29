@@ -10,8 +10,8 @@ let periods: EnhancedPeriod[] = undefined;
 const wrapper = new PalladioWrapper();
 
 $(document).ready(function() {
-    $("#period-url, #full-url").bind('keyup', function () {
-        $('#submit-button').prop('disabled', !$('#period-url').val || !$('#full-url').val);
+    $("#period-url, #full-url, #places-url").bind('keyup', function () {
+        $('#submit-button').prop('disabled', !$('#period-url').val || !$('#full-url').val || !$("places-url").val);
     });
 });
 
@@ -32,6 +32,7 @@ $(document).ready(function() {
             dataType: "json",
         });
     } catch(e) {
+        console.error(e);
         $('#error').html("Can't load full period data");
         return;
     }
@@ -44,7 +45,21 @@ $(document).ready(function() {
             dataType: "json",
         });
     } catch(e) {
+        console.error(e);
         $('#error').html("Can't load full period data");
+        return;
+    }
+
+    let places: any;
+    try {
+        places = await $.ajax({
+            type: 'GET',
+            url: $('#places-url').val().toString(),
+            dataType: "json",
+        });
+    } catch(e) {
+        console.error(e);
+        $('#error').html("Can't load places data");
         return;
     }
 

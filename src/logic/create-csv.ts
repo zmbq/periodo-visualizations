@@ -252,14 +252,6 @@ export class CsvCreator {
 
     // Get the CsvData of a period object 
     public getCsvData(period: any): CsvData {
-        function sanitizeField(field) {
-            // We place quotes around fields
-            // We also need to escape quotes inside the field, so we replace quotes with double quotes
-            // See here: https://stackoverflow.com/a/46638833/871910
-            const doubleQuotes = field.replace(/"/g,'""');
-            return `"${doubleQuotes}"`;
-        }
-
         const props = this.getPeriodProperties(period);
 
         // Convert properties to a list of fields
@@ -275,7 +267,7 @@ export class CsvCreator {
         ];
 
         // Sanitize each field
-        const sanitized = fields.map((field) => sanitizeField(field));
+        const sanitized = fields.map((field) => sanitizeCsvField(field));
 
         // Join them all into one row
         const row = sanitized.join(',');
@@ -325,4 +317,12 @@ export class CsvCreator {
         const csv = lines.join('\n');
         return csv;
     }
+}
+
+export function sanitizeCsvField(field) {
+    // We place quotes around fields
+    // We also need to escape quotes inside the field, so we replace quotes with double quotes
+    // See here: https://stackoverflow.com/a/46638833/871910
+    const doubleQuotes = field.replace(/"/g,'""');
+    return `"${doubleQuotes}"`;
 }

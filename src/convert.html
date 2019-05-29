@@ -11,15 +11,17 @@
         <div class="row">
             <div id="leftCol" class="col-5">
                 <h4> Periods JSON URL</h4>
-                <input type='text' id='period-url' name='url' />
+                <input type='text' id='period-url' name='periods' />
             </div>
             <div id="rightCol" class="col-5">
                 <h4>Full JSON URL</h4>
-                <input type='text' id='full-url' name='url' />
+                <input type='text' id='full-url' name='full' value='https://data.perio.do/d' />
+                <h4>Places Database</h4>
+                <input type='text' id='places-url' name='places' value='https://data.perio.do/graphs/places.json' />
             </div>
             <div class="col-2 actions">
-                <!-- <input type='submit' id='submit-button' /> -->
-                <input type="submit" value="Convert to CSV" id='submit-button' disabled="disabled" />
+                <input type="submit" value="Convert to CSV" id='submit-periods' disabled="disabled" />
+                <input type="submit" value="Convert to Map CSV" id='submit-map' disabled="disabled" />
                 <p class="text-danger" id="error"></p>
             </div>
         </div>
