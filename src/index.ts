@@ -97,7 +97,7 @@ async function submitTimespan() {
         options.startDimension(comps.dimensionFromKey('earliest start'));
         options.endDimension(comps.dimensionFromKey('latest stop'));
         options.tooltipDimension(comps.dimensionFromKey('label'));
-        options.groupDimension(comps.dimensionFromKey('publication year'));
+        options.sortDimension(comps.dimensionFromKey('publication year'));
         // options.labelDimension(comps.dimensionFromKey('label'));
     }
     setTimeout(setTimespan, 200);
