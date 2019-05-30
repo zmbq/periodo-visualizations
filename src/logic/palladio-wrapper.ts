@@ -340,13 +340,17 @@ export class MapConverter {
 				console.error('No rowAsArray in place ', place);
 			}
             for(let i=0; i < place.rowAsArray.length; i++) {
-                obj[header[i]] = place.rowAsArray[i];
-            }
-
+                obj[header[i]] = place.rowAsArray[i] == null ? '' : place.rowAsArray[i].toString();
+			}
             return obj;
         });
 
         return data;
+	}
+
+	public static getState(): any {
+		// Note: this is HARD CODED to handle our save template
+		return MapConverter.csvSaveTemplate.vis[2].importJson;
 	}
 
 	private static readonly csvSaveTemplate: any = {

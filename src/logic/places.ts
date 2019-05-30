@@ -123,13 +123,13 @@ export class PlaceProcessor {
     }
 
     private createLocationRowFields(location: PeriodLocationProperties): any[] {
-        const fields = [location.period.URI, 
+        let fields = [location.period.URI, 
             location.period.label, 
             location.period.earliestStartDate, 
             location.period.latestStopDate, 
             location.spatialURI,
             location.name,
-            location.middlePoint];
+            `${location.middlePoint[0]},${location.middlePoint[1]}`];
         return fields;
     }
 

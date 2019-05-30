@@ -106,11 +106,17 @@ async function submitTimespan() {
 async function submitMap() {
     await loadEverything();
 
-    console.log('places', places);
+    console.log('Converting data for Palladio');
     const palladioData = MapConverter.convertToPalladio(places);
-    console.log('Loading data', palladioData);
+    console.log('Initializing Palladio');
     wrapper.loadData(palladioData);
+
     const map = wrapper.addComponent('map', '#palladio', {
         showSettings: false,
     });
+
+    setTimeout(() => {
+        const options = map.getOptions();
+        options.importState(MapConverter.getState());
+    }, 500);
 }
