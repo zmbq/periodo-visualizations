@@ -22,7 +22,7 @@
  * We cheat a little here, by using Palladio Web to generate the JSON template. We then just add the data array.
  */
 
-import { CsvCreator, EnhancedPeriod } from './create-csv';
+import { PeriodProcessor, EnhancedPeriod } from './periods';
 import { PeriodLocationProperties, PlaceProcessor } from './places';
 
 declare const startPalladio: any;
@@ -52,7 +52,7 @@ export class PalladioWrapper {
 export class TimespanConverter {
 	public static convertToPalladio(periods: EnhancedPeriod[]) : any {
         const data = {...TimespanConverter.csvSaveTemplate} // Copy our template
-        const header = CsvCreator.csvHeader.split(',');
+        const header = PeriodProcessor.csvHeader.split(',');
 
         data.files[0].data = periods.map((period) => {
            // The data property of a file is an object mapping from column title to column value

@@ -1,5 +1,5 @@
 // import * as fs from 'fs';
-import { CsvCreator, EnhancedPeriod } from './logic/create-csv';
+import { PeriodProcessor, EnhancedPeriod } from './logic/periods';
 import { PalladioWrapper, TimespanConverter, MapConverter } from './logic/palladio-wrapper';
 import { PlaceProcessor, PeriodLocationProperties } from './logic/places';
 
@@ -68,7 +68,7 @@ async function loadEverything() {
         return;
     }
 
-    const creator = new CsvCreator(full);
+    const creator = new PeriodProcessor(full);
     creator.enhancePeriods(periodData);
     periods = Array.from(creator.iteratePeriods(periodData));
  

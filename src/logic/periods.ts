@@ -60,7 +60,7 @@ export interface EnhancedPeriod {
  * 
  * Once initialized, the class instance can be used to iterate over periods in a period JSON-LD, or generate the final CSV rows.
  */
-export class CsvCreator {
+export class PeriodProcessor {
     // A map from a period id to its authority
     private periodToAuthorities: Map<string, AuthorityProperties>; 
 
@@ -319,7 +319,7 @@ export class CsvCreator {
         // the fastest way according to this: https://stackoverflow.com/a/2087538/871910
         const lines: string[] = [];
         
-        lines.push(CsvCreator.csvHeader);
+        lines.push(PeriodProcessor.csvHeader);
         for(const row of this.generateCsvRows(data)) {
             lines.push(row);
         }

@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { CsvCreator } from '../src/logic/create-csv';
+import { PeriodProcessor } from '../src/logic/periods';
 import { PlaceProcessor } from '../src/logic/places';
 
 class Args {
@@ -34,7 +34,7 @@ const args = new Args();
 
 console.log(`Loading full data from ${args.fullDataPath}`);
 const full = readFile(args.fullDataPath);
-const creator = new CsvCreator(full);
+const creator = new PeriodProcessor(full);
 
 console.log(`Loading places data from ${args.placesDataPath}`);
 const places = readFile(args.placesDataPath);

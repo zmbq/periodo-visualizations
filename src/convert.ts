@@ -1,10 +1,10 @@
 // import * as fs from 'fs';
-import { CsvCreator } from './logic/create-csv';
+import { PeriodProcessor } from './logic/periods';
 import { PlaceProcessor } from './logic/places';
 require('bootstrap/dist/css/bootstrap.css')
 require('./convert.scss');
 
- let periods: any, full: any, places: PlaceProcessor, creator: CsvCreator;
+ let periods: any, full: any, places: PlaceProcessor, creator: PeriodProcessor;
 
  async function loadEverything() {
     $('error').html('');
@@ -51,7 +51,7 @@ require('./convert.scss');
         return;
     }
 
-    creator = new CsvCreator(full);
+    creator = new PeriodProcessor(full);
     places = new PlaceProcessor(placeData);
 
     creator.enhancePeriods(periods);

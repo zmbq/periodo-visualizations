@@ -1,5 +1,5 @@
 import { stringify } from "querystring";
-import { PeriodProperties, sanitizeCsvField } from "./create-csv";
+import { PeriodProperties, sanitizeCsvField } from "./periods";
 
 class IgnorePlaceError { }
 class PlaceInfo {
